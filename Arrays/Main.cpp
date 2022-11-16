@@ -94,5 +94,4 @@ int shiftLeft(int arr[], const int n)
 		}
 		return arr[i];
 	}
-
 }
