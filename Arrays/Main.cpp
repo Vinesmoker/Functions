@@ -1,18 +1,25 @@
 #include<iostream>
 using namespace std;
 
+#define delimiter "\n-------------------------------------------------------------------\n"
+
 void FillRand(int arr[], const int n, int minRand = 0, int maxRand = 100); // Реализация
+void FillRand(double arr[], const double n, double minRand = 0, double maxRand = 100);
+
 void Print(int arr[], const int n);
+void Print(double arr[], const double n);
+
 int Sum(int arr[], const int n);
 double Avg(int arr[], const int n);
 int minValueIn(int arr[], const int n);
 int maxValueIn(int arr[], const int n);
-int shiftLeft(int arr[], const int n);
+//void shiftLeft(int arr[], const int n, int numOfShifts);
+void Sort(int arr[], const int n);
 
 void main ()
 {
 	setlocale(LC_ALL, "");
-	const int n = 5;
+	const int n = 10;
 	int arr[n] = {};
 
 	FillRand(arr, n);
@@ -21,8 +28,24 @@ void main ()
 	cout << "Среднее арефмитическое элементов массива: " << Avg(arr, n) << endl;
 	cout << "Минимальное значение элемена массива: " << minValueIn(arr, n) << endl;
 	cout << "Максимальное значение элемента в массиве: " << maxValueIn(arr, n) << endl;
-	cout << shiftLeft(arr, n) << endl;
-}
+	//cin >> numOfShits;
+	//cout << shiftLeft(arr, n, numOfShifts) << endl;
+	Sort(arr, n);
+	Print(arr, n);
+
+	cout << delimiter << endl;
+
+	const int SIZE = 8;
+	double brr[SIZE];
+	FillRand(brr, SIZE);
+	Print(brr, SIZE);
+	/*
+	cout << "Сумма элементов массива: " << Sum(arr, SIZE) << endl;
+	cout << "Среднее арефмитическое элементов массива: " << Avg(arr, SIZE) << endl;
+	cout << "Минимальное значение элемена массива: " << minValueIn(arr, SIZE) << endl;
+	cout << "Максимальное значение элемента в массиве: " << maxValueIn(arr, SIZE) << endl;
+	*/
+}   
 
 void FillRand(int arr[], const int n, int minRand, int maxRand) // Прототип
 {
@@ -77,9 +100,10 @@ int maxValueIn(int arr[], const int n)
 	}
 	return max;
 }
-int shiftLeft(int arr[], const int n)
+/*
+void shiftLeft(int arr[], const int n, int numOfShifts)
 {
-	cout << "Введите количество сдвигов влево: "; int numOfShifts; cin >> numOfShifts;
+	cout << "Введите количество сдвигов влево: " << endl;
 	for (int i = 0; i < numOfShifts; i++)
 	{
 		int buff = arr[0];
@@ -92,6 +116,46 @@ int shiftLeft(int arr[], const int n)
 		{
 			cout << arr[i] << "\t";
 		}
-		return arr[i];
 	}
+}
+*/
+void Sort(int arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			if (arr[j] < arr[i])
+			{
+				int buff = arr[i];
+				arr[i] = arr[j];
+				arr[j] = buff;
+			}
+		}
+	}
+}
+void FillRand(double arr[], const double n, double minRand, double maxRand) // Прототип
+{
+	if (minRand > maxRand)
+	{
+		int buff = minRand; minRand = maxRand; maxRand = buff;
+	}
+	if (minRand == maxRand)maxRand++;
+
+	minRand *= 100;
+	maxRand *= 100;
+	for (int i = 0; i < n; i++)
+	{
+		arr[i] = rand() % int((maxRand - minRand) + minRand);
+		arr[i] /= 100;
+	}
+}
+void Print(double arr[], const double n)
+{
+
+	for (int i = 0; i < n; i++)
+	{
+		cout << arr[i] << "\t";
+	}
+	cout << endl;
 }
