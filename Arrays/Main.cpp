@@ -2,12 +2,16 @@
 using namespace std;
 
 #define delimiter "\n-------------------------------------------------------------------\n"
+const int ROWS = 3;
+const int COLS = 4;
 
 void FillRand(int arr[], const int n, int minRand = 0, int maxRand = 100); // Реализация
 void FillRand(double arr[], const double n, double minRand = 0, double maxRand = 100);
+void FillRand(int i_arr[ROWS][COLS], const int ROWS, const int COLS);
 
 void Print(int arr[], const int n);
 void Print(double arr[], const double n);
+void Print(int arr[ROWS][COLS], const int ROWS, const int COLS);
 
 int Sum(int arr[], const int n);
 double Avg(int arr[], const int n);
@@ -45,6 +49,12 @@ void main ()
 	cout << "Минимальное значение элемена массива: " << minValueIn(arr, SIZE) << endl;
 	cout << "Максимальное значение элемента в массиве: " << maxValueIn(arr, SIZE) << endl;
 	*/
+
+	
+	int i_arr2[ROWS][COLS];
+	FillRand(i_arr2, ROWS, COLS);
+	Print(i_arr2, ROWS, COLS);
+
 }   
 
 void FillRand(int arr[], const int n, int minRand, int maxRand) // Прототип
@@ -158,4 +168,25 @@ void Print(double arr[], const double n)
 		cout << arr[i] << "\t";
 	}
 	cout << endl;
+}
+void FillRand(int i_arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			i_arr[i][j] = rand() % 100;
+		}
+	}
+}
+void Print(int arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			cout << arr[i][j] << "\t";
+		}
+		cout << endl;
+	}
 }

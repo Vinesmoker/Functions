@@ -4,7 +4,7 @@ using namespace std;
 //#define ELEVATOR
 //#define FACTORIAL
 //#define POW
-#define FIBONACCI
+//#define FIBONACCI
 
 void elevator(int floor);
 int factorial(int n = 6);
