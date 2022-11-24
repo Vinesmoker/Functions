@@ -1,9 +1,18 @@
 #include<iostream>
 using namespace std;
+
 //#define ELEVATOR
+//#define FACTORIAL
+//#define POW
+#define FIBLIM
+#define FIBQUANT
+
 
 void elevator(int floor);
 int factorial(int n = 6);
+double Pow(double a, int n);
+void FibLim(int n, int a = 1, int b = 1);
+void FibQuant(int n, long long int a = 1, long long int b = 1);
 
 void main ()
 {
@@ -14,9 +23,21 @@ void main ()
 	cout << "¬ведите номер этажаж: "; cin >> n;
 	elevator(n);
 #endif // ELEVATOR
+#ifdef FACTORIAL
 	int n;
 	cout << "¬ведите число дл€ вычислени€ факториала: "; cin >> n;
 	cout << factorial(n) << endl;
+#endif // FACTORIAL
+#ifdef POW
+	int a, n;
+	cout << "¬ведите основание и показатель степени: "; cin >> a >> n;
+	cout << Pow(a, n);
+#endif // POW
+	int n;
+	cout << "¬ведите предельное число: "; cin >> n;
+	FibLim(n);
+	cout << endl;
+	FibQuant(n);
 }
 
 void elevator(int floor)
@@ -35,4 +56,24 @@ int factorial(int n)
 	//if (n == 0)return 1;
 	//else return n * factorial(n - 1);
 	return n == 0 ? 1: n * factorial(n - 1);
+}
+double Pow(double a, int n)
+{
+	//if (n == 0)return 1;
+	//else if (n < 0)return 1 / a * Pow(a, n + 1);
+	//else return a * Pow(a, n - 1);
+	//return n == 0 ? 1 : n > 0 ? a * Pow(a, n - 1) : 1 / a * Pow(a, n + 1);
+	return n == 0 ? 1 : n > 0 ? a * Pow(a, n - 1) : 1 / Pow(a, -n);
+}
+void FibLim(int n, int a, int b)
+{
+	if (a > n)return;
+	cout << a << "\t";
+	FibLim(n, b, a + b);
+}
+void FibQuant(int n, long long int a, long long int b)
+{
+	if (n == 0)return;
+	cout << a << "\t";
+	FibQuant(n - 1, b, a + b);
 }
