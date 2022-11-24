@@ -4,15 +4,13 @@ using namespace std;
 //#define ELEVATOR
 //#define FACTORIAL
 //#define POW
-#define FIBLIM
-#define FIBQUANT
-
+#define FIBONACCI
 
 void elevator(int floor);
 int factorial(int n = 6);
 double Pow(double a, int n);
 void FibLim(int n, int a = 1, int b = 1);
-void FibQuant(int n, long long int a = 1, long long int b = 1);
+void FibQuant(int n, int i = 0, long long int a = 1, long long int b = 1);
 
 void main ()
 {
@@ -33,11 +31,14 @@ void main ()
 	cout << "¬ведите основание и показатель степени: "; cin >> a >> n;
 	cout << Pow(a, n);
 #endif // POW
+#ifdef FIBONACCI
 	int n;
 	cout << "¬ведите предельное число: "; cin >> n;
 	FibLim(n);
-	cout << endl;
+	cout << "\n\n";
 	FibQuant(n);
+#endif // FIBONACCI
+
 }
 
 void elevator(int floor)
@@ -71,9 +72,9 @@ void FibLim(int n, int a, int b)
 	cout << a << "\t";
 	FibLim(n, b, a + b);
 }
-void FibQuant(int n, long long int a, long long int b)
+void FibQuant(int n, int i, long long int a, long long int b)
 {
-	if (n == 0)return;
-	cout << a << "\t";
-	FibQuant(n - 1, b, a + b);
+	if (i > n)return;
+	cout << i << "\t" << a << endl;
+	FibQuant(n, i + 1, b, a + b);
 }
