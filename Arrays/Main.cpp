@@ -17,7 +17,8 @@ int Sum(int arr[], const int n);
 double Avg(int arr[], const int n);
 int minValueIn(int arr[], const int n);
 int maxValueIn(int arr[], const int n);
-//void shiftLeft(int arr[], const int n, int numOfShifts);
+void ShiftLeft(int arr[], const int n, int numOfShifts);
+void ShiftRight(int arr[], const int n, int numOfShifts);
 void Sort(int arr[], const int n);
 
 void main ()
@@ -25,15 +26,18 @@ void main ()
 	setlocale(LC_ALL, "");
 	const int n = 10;
 	int arr[n] = {};
-
+	int numOfShifts;
 	FillRand(arr, n);
 	Print(arr, n);
 	cout << "Сумма элементов массива: " << Sum(arr, n) << endl;
 	cout << "Среднее арефмитическое элементов массива: " << Avg(arr, n) << endl;
 	cout << "Минимальное значение элемена массива: " << minValueIn(arr, n) << endl;
 	cout << "Максимальное значение элемента в массиве: " << maxValueIn(arr, n) << endl;
-	//cin >> numOfShits;
-	//cout << shiftLeft(arr, n, numOfShifts) << endl;
+	cout << "Enter the number of shifts of the array: "; cin >> numOfShifts;
+	ShiftLeft(arr, n, numOfShifts);
+	cout << endl;
+	ShiftRight(arr, n, numOfShifts);
+	cout << "Sort the array in ascending order: " << endl;
 	Sort(arr, n);
 	Print(arr, n);
 
@@ -43,12 +47,10 @@ void main ()
 	double brr[SIZE];
 	FillRand(brr, SIZE);
 	Print(brr, SIZE);
-	/*
 	cout << "Сумма элементов массива: " << Sum(arr, SIZE) << endl;
 	cout << "Среднее арефмитическое элементов массива: " << Avg(arr, SIZE) << endl;
 	cout << "Минимальное значение элемена массива: " << minValueIn(arr, SIZE) << endl;
 	cout << "Максимальное значение элемента в массиве: " << maxValueIn(arr, SIZE) << endl;
-	*/
 
 	
 	int i_arr2[ROWS][COLS];
@@ -110,10 +112,9 @@ int maxValueIn(int arr[], const int n)
 	}
 	return max;
 }
-/*
-void shiftLeft(int arr[], const int n, int numOfShifts)
+
+void ShiftLeft(int arr[], const int n, int numOfShifts)
 {
-	cout << "Введите количество сдвигов влево: " << endl;
 	for (int i = 0; i < numOfShifts; i++)
 	{
 		int buff = arr[0];
@@ -122,13 +123,33 @@ void shiftLeft(int arr[], const int n, int numOfShifts)
 			arr[i] = arr[i + 1];
 		}
 		arr[n - 1] = buff;
+		cout << endl;
 		for (int i = 0; i < n; i++)
 		{
 			cout << arr[i] << "\t";
 		}
 	}
+	cout << endl;
 }
-*/
+void ShiftRight(int arr[], const int n, int numOfShifts)
+{
+	for (int i = 0; i < numOfShifts; i++)
+	{
+		int buff = arr[n - 1];
+		for (int i = n - 2; i >= 0; i--)
+		{
+			arr[i + 1] = arr[i];
+		}
+		arr[0] = buff;
+		for (int i = 0; i < n; i++)
+		{
+			cout << arr[i] << "\t";
+		}
+		cout << endl;
+	}
+	cout << endl;
+}
+
 void Sort(int arr[], const int n)
 {
 	for (int i = 0; i < n; i++)
