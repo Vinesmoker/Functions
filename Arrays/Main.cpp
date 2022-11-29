@@ -19,6 +19,7 @@ int minValueIn(int arr[], const int n);
 int maxValueIn(int arr[], const int n);
 void ShiftLeft(int arr[], const int n, int numOfShifts);
 void ShiftRight(int arr[], const int n, int numOfShifts);
+int Unique(int arr[], const int n);
 void Sort(int arr[], const int n);
 
 void main ()
@@ -34,12 +35,14 @@ void main ()
 	cout << "Минимальное значение элемена массива: " << minValueIn(arr, n) << endl;
 	cout << "Максимальное значение элемента в массиве: " << maxValueIn(arr, n) << endl;
 	cout << "Enter the number of shifts of the array: "; cin >> numOfShifts;
-	ShiftLeft(arr, n, numOfShifts);
-	cout << endl;
+	cout << "Shift left: " << endl;
+	ShiftLeft(arr, n, numOfShifts); cout << endl;
+	cout << "Shift right: " << endl;
 	ShiftRight(arr, n, numOfShifts);
 	cout << "Sort the array in ascending order: " << endl;
-	Sort(arr, n);
-	Print(arr, n);
+	Sort(arr, n); Print(arr, n);
+	cout << "Unique numbers: " << endl;
+	Unique(arr, n); Print(arr, n);
 
 	cout << delimiter << endl;
 
@@ -123,11 +126,7 @@ void ShiftLeft(int arr[], const int n, int numOfShifts)
 			arr[i] = arr[i + 1];
 		}
 		arr[n - 1] = buff;
-		cout << endl;
-		for (int i = 0; i < n; i++)
-		{
-			cout << arr[i] << "\t";
-		}
+		Print(arr, n);
 	}
 	cout << endl;
 }
@@ -141,15 +140,34 @@ void ShiftRight(int arr[], const int n, int numOfShifts)
 			arr[i + 1] = arr[i];
 		}
 		arr[0] = buff;
-		for (int i = 0; i < n; i++)
-		{
-			cout << arr[i] << "\t";
-		}
-		cout << endl;
+		Print(arr, n);
 	}
 	cout << endl;
 }
-
+int Unique(int arr[], const int n)
+{
+	int min = minValueIn(arr, n);
+	int max = maxValueIn(arr, n) + 2;
+	bool random;
+	for (int i = 0; i < n;)
+	{
+		random = false;
+		int ranVal = min + rand() % (max - min);
+		for (int j = 0; j < i; j++)
+		{
+			if (arr[j] == ranVal)
+			{
+				random = true;
+				break;
+			}
+		}
+		if (random == false)
+		{
+			arr[i] = ranVal; i++;
+		}
+	}
+	return arr[n];
+}
 void Sort(int arr[], const int n)
 {
 	for (int i = 0; i < n; i++)
