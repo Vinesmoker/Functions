@@ -5,7 +5,7 @@ using namespace std;
 const int ROWS = 3;
 const int COLS = 4;
 
-void FillRand(int arr[], const int n, int minRand = 0, int maxRand = 100); // Реализация
+void FillRand(int arr[], const int n, int minRand = 70, int maxRand = 80); // Реализация
 void FillRand(double arr[], const double n, double minRand = 0, double maxRand = 100);
 void FillRand(int i_arr[ROWS][COLS], const int ROWS, const int COLS);
 
@@ -19,6 +19,7 @@ int minValueIn(int arr[], const int n);
 int maxValueIn(int arr[], const int n);
 void ShiftLeft(int arr[], const int n, int numOfShifts);
 void ShiftRight(int arr[], const int n, int numOfShifts);
+void Search(int arr[], int arr2[], const int n);
 int Unique(int arr[], const int n);
 void Sort(int arr[], const int n);
 
@@ -26,7 +27,7 @@ void main ()
 {
 	setlocale(LC_ALL, "");
 	const int n = 10;
-	int arr[n] = {};
+	int arr[n]{}; int arr2[n]{};
 	int numOfShifts;
 	FillRand(arr, n);
 	Print(arr, n);
@@ -39,6 +40,8 @@ void main ()
 	ShiftLeft(arr, n, numOfShifts); cout << endl;
 	cout << "Shift right: " << endl;
 	ShiftRight(arr, n, numOfShifts);
+	cout << "Searching repetitions of numbers in the array: " << endl;
+	Search(arr, arr2, n);
 	cout << "Sort the array in ascending order: " << endl;
 	Sort(arr, n); Print(arr, n);
 	cout << "Unique numbers: " << endl;
@@ -61,7 +64,7 @@ void main ()
 	Print(i_arr2, ROWS, COLS);
 
 }   
-
+// Statistic
 void FillRand(int arr[], const int n, int minRand, int maxRand) // Прототип
 {
 	if (minRand > maxRand)
@@ -115,7 +118,7 @@ int maxValueIn(int arr[], const int n)
 	}
 	return max;
 }
-
+// Actions with the array
 void ShiftLeft(int arr[], const int n, int numOfShifts)
 {
 	for (int i = 0; i < numOfShifts; i++)
@@ -144,29 +147,59 @@ void ShiftRight(int arr[], const int n, int numOfShifts)
 	}
 	cout << endl;
 }
-int Unique(int arr[], const int n)
+void Search(int arr[], int arr2[], const int n)
 {
 	int min = minValueIn(arr, n);
-	int max = maxValueIn(arr, n) + 2;
-	bool random;
-	for (int i = 0; i < n;)
+	int max = maxValueIn(arr, n);
+	int count = 0;
+	while (max - min < n)max++;
+	for (int i = 0; i < n; i++)
 	{
-		random = false;
-		int ranVal = min + rand() % (max - min);
+		arr[i] = min + rand() % (max - min);
 		for (int j = 0; j < i; j++)
 		{
-			if (arr[j] == ranVal)
+			if (arr[i] == arr[j])count++;
+		}
+		arr2[i] = count;
+		count = 0;
+	}
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (arr[i] == arr[j])break;
+		}
+		if (arr2[i] != 0)cout << arr[i] << "\t" << arr2[i] << endl;
+	}
+}
+int Unique(int arr[], const int n)
+{
+	bool random = false;
+	for (int i = 0; i < n;)
+	{
+		int min = minValueIn(arr, n);
+		int max = maxValueIn(arr, n);
+		while (max - min < n)max++;
+		bool random;
+		for (int i = 0; i < n;)
+		{
+			random = false;
+			int ranVal = rand() % (max - min) + (min);
+			for (int j = 0; j < i; j++)
 			{
-				random = true;
-				break;
+				if (arr[j] == ranVal)
+				{
+					random = true;
+					break;
+				}
+			}
+			if (random == false)
+			{
+				arr[i] = ranVal; i++;
 			}
 		}
-		if (random == false)
-		{
-			arr[i] = ranVal; i++;
-		}
+		return arr[n];
 	}
-	return arr[n];
 }
 void Sort(int arr[], const int n)
 {
@@ -183,6 +216,7 @@ void Sort(int arr[], const int n)
 		}
 	}
 }
+
 void FillRand(double arr[], const double n, double minRand, double maxRand) // Прототип
 {
 	if (minRand > maxRand)
@@ -208,6 +242,7 @@ void Print(double arr[], const double n)
 	}
 	cout << endl;
 }
+// Actions with double array
 void FillRand(int i_arr[ROWS][COLS], const int ROWS, const int COLS)
 {
 	for (int i = 0; i < ROWS; i++)
