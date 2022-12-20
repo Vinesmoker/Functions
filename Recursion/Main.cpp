@@ -1,80 +1,48 @@
 #include<iostream>
 using namespace std;
 
-//#define ELEVATOR
-//#define FACTORIAL
-//#define POW
-//#define FIBONACCI
+int Factorial(int f);
+double Pow(double num, int degree);
+void FibLimit(int lim, int a = 1, int b = 1);
+void FibQuantity(int quant, int count = 0, long a = 1, long b = 1);
 
-void elevator(int floor);
-int factorial(int n = 6);
-double Pow(double a, int n);
-void FibLim(int n, int a = 1, int b = 1);
-void FibQuant(int n, int i = 0, long long int a = 1, long long int b = 1);
-
-void main ()
+void main()
 {
 	setlocale(LC_ALL, "");
-#ifdef ELEVATOR
-	cout << "Hello Recursion" << endl;
-	int n;
-	cout << "Введите номер этажаж: "; cin >> n;
-	elevator(n);
-#endif // ELEVATOR
-#ifdef FACTORIAL
-	int n;
-	cout << "Введите число для вычисления факториала: "; cin >> n;
-	cout << factorial(n) << endl;
-#endif // FACTORIAL
-#ifdef POW
-	int a, n;
-	cout << "Введите основание и показатель степени: "; cin >> a >> n;
-	cout << Pow(a, n);
-#endif // POW
-#ifdef FIBONACCI
-	int n;
-	cout << "Введите предельное число: "; cin >> n;
-	FibLim(n);
-	cout << "\n\n";
-	FibQuant(n);
-#endif // FIBONACCI
-
+	int f; double num; int degree; int lim;
+	int quant;
+	cout << "Введите число для вычисления его факториала: "; cin >> f;
+	cout << "Результат: " << Factorial(f) << endl;
+	cout << "Введите число для возведения в степень: "; cin >> num;
+	cout << "Введите степень для возведения в нее числа " << num << ": "; cin >> degree;
+	cout << "Результат: " << Pow(num, degree) << endl;
+	cout << "Введите предельное число ряда Фибоначи: "; cin >> lim;
+	cout << "Результат: "; FibLimit(lim); cout << endl;
+	cout << "Введите необходимое количество элементов ряда Фибоначи: "; cin >> quant;
+	cout << "Результат: " << endl;
+	FibQuantity(quant);
 }
 
-void elevator(int floor)
+int Factorial(int f)
 {
-	if (floor == 0)
-	{
-		cout << "Вы в подвале" << endl;
-		return;
-	}
-	cout << "Вы на " << floor << " этаже" << endl;
-	elevator(floor - 1);
-	cout << "Вы на " << floor << " этаже" << endl;
+	if (f == 0)return 1;
+	else return f * Factorial(f - 1);
 }
-int factorial(int n)
+double Pow(double num, int degree)
 {
-	//if (n == 0)return 1;
-	//else return n * factorial(n - 1);
-	return n == 0 ? 1: n * factorial(n - 1);
+	if (degree == 0)return 1;
+	if (degree < 0)return 1 / num * Pow(num, degree + 1);
+	else return num * Pow(num, degree - 1);
 }
-double Pow(double a, int n)
+void FibLimit(int lim, int a, int b)
 {
-	//if (n == 0)return 1;
-	//else if (n < 0)return 1 / a * Pow(a, n + 1);
-	//else return a * Pow(a, n - 1);
-	//return n == 0 ? 1 : n > 0 ? a * Pow(a, n - 1) : 1 / a * Pow(a, n + 1);
-	return n == 0 ? 1 : n > 0 ? a * Pow(a, n - 1) : 1 / Pow(a, -n);
-}
-void FibLim(int n, int a, int b)
-{
-	if (a > n)return;
+	if (a > lim)return;
 	cout << a << "\t";
-	FibLim(n, b, a + b);
+	FibLimit(lim, b, a + b);
 }
-void FibQuant(int n, int i, long long int a, long long int b)
+void FibQuantity(int quant, int count, long a, long b)
 {
-	if (i > n)return;
-	cout << i << "\t" << a << endl;
-	FibQuant(n, i + 1, b, a + b);
+	if (count > quant)return;
+	cout << count << "\t" << a << "\n";
+	FibQuantity(quant, count + 1, b, a + b);
 }
