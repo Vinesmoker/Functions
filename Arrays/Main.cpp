@@ -5,10 +5,10 @@ using namespace std;
 const int ROWS = 3;
 const int COLS = 4;
 
-void FillRand(int arr[], const int n, int minRand = 70, int maxRand = 80); // Реализация
+void FillRand(int arr[], const int n, int minRand = 70, int maxRand = 79); // Реализация
 void FillRand(double arr[], const double n, double minRand = 0, double maxRand = 0.9);
 void FillRand(float arr[], const float n, float minRand = 0, float maxRand = 0.9);
-void FillRand(char arr[], const int n, int minRand = 50, int maxRand = 255);
+void FillRand(char arr[], const int n, int minRand = 50, int maxRand = 100);
 
 void FillRand(int i_arr[ROWS][COLS], const int ROWS, const int COLS);
 
@@ -55,7 +55,7 @@ void Search(double drr[], int drr2[], const int n);
 void Search(float frr[], int frr2[], const int n);
 void Search(char crr[], int crr2[], const int n);
 
-int Unique(int arr[], const int n);
+void Unique(int arr[], const int n);
 void Unique(double drr[], const int n);
 void Unique(float frr[], const int n);
 void Unique(char crr[], const int n);
@@ -63,6 +63,7 @@ void Unique(char crr[], const int n);
 void Sort(int arr[], const int n);
 void Sort(double drr[], const int n);
 void Sort(float frr[], const int n);
+void Sort(char crr[], const int n);
 
 void main()
 {
@@ -104,7 +105,10 @@ void main()
 	cout << "Searching repetitions of numbers in the array: " << endl;
 	Search(crr, crr2, n);
 	cout << "Unique numbers: " << endl;
-	Unique(crr, n);
+	Unique(crr, n); Print(crr, SIZE3);
+	cout << "Sort the array in ascending order: " << endl;
+	Sort(crr, SIZE3); Print(crr, SIZE3);
+
 
 
 	cout << delimiter << endl;
@@ -124,7 +128,7 @@ void main()
 	cout << "Searching repetitions of numbers in the array: " << endl;
 	Search(drr, drr2, SIZE);
 	cout << "Unique numbers: " << endl;
-	Unique(drr, SIZE); cout << endl;
+	Unique(drr, SIZE); Print(drr, SIZE);
 	cout << "Sort the array in ascending order: " << endl;
 	Sort(drr, SIZE); Print(drr, SIZE);
 
@@ -145,7 +149,7 @@ void main()
 	cout << "Searching pepetitions of numbers in the array: " << endl;
 	Search(frr, frr2, SIZE2);
 	cout << "Unique numbers: " << endl;
-	Unique(frr, SIZE2);
+	Unique(frr, SIZE2); Print(frr, SIZE2);
 	cout << "Sort the array in ascending order: " << endl;
 	Sort(frr, SIZE2); Print(frr, SIZE2);
 
@@ -169,7 +173,7 @@ void FillRand(int arr[], const int n, int minRand, int maxRand) // Прототип
 	//Заполнение случайными числами:
 	for (int i = 0; i < n; i++)
 	{
-		arr[i] = rand() % (maxRand - minRand) + minRand;
+		arr[i] = minRand + rand() % (maxRand - minRand);
 	}
 }
 void Print(int arr[], const int n)
@@ -262,33 +266,19 @@ void Search(int arr[], int arr2[], const int n)
 		cout << arr[i] << "\t" << arr2[i] << endl;
 	}
 }
-int Unique(int arr[], const int n)
+void Unique(int arr[], const int n)
 {
-	bool random = false;
-	for (int i = 0; i < n;)
+	int min = 70; int max = 80;
+	for (int i = 0; i < n; i++)
 	{
-		int min = minValueIn(arr, n);
-		int max = maxValueIn(arr, n);
-		while (max - min < n)max++;
-		bool random;
-		for (int i = 0; i < n;)
+		for (int j = 0; j < n; j++)
 		{
-			random = false;
-			int ranVal = rand() % (max - min) + (min);
-			for (int j = 0; j < i; j++)
+			if (arr[j] == arr[i] && i != j)
 			{
-				if (arr[j] == ranVal)
-				{
-					random = true;
-					break;
-				}
-			}
-			if (random == false)
-			{
-				arr[i] = ranVal; i++;
+				arr[i] = min + rand() % (max - min);
+				j = 0;
 			}
 		}
-		return arr[i];
 	}
 }
 void Sort(int arr[], const int n)
@@ -346,7 +336,7 @@ void FillRand(char arr[], const int n, int minRand, int maxRand)
 	{
 		if (minRand > maxRand)
 		{
-			int buff = minRand; minRand = maxRand; maxRand = buff;
+			char buff = minRand; minRand = maxRand; maxRand = buff;
 		}
 		if (minRand == maxRand)maxRand++;
 
@@ -355,7 +345,6 @@ void FillRand(char arr[], const int n, int minRand, int maxRand)
 		for (int i = 0; i < n; i++)
 		{
 			arr[i] = rand() % int((maxRand - minRand) + minRand);
-			arr[i] /= 100;
 		}
 	}
 }
@@ -448,7 +437,7 @@ float minValueIn(float frr[], const float n)
 }
 char minValueIn(char crr[], const int n)
 {
-	char min = crr[0];
+	int min = crr[0];
 	for (int i = 0; i < n; i++)
 	{
 		if (crr[i] < min)min = crr[i];
@@ -476,12 +465,12 @@ float maxValueIn(float frr[], const float n)
 }
 char maxValueIn(char crr[], const int n)
 {
-	char max = crr[0];
+	int max = crr[0];
 	for (int i = 0; i < n; i++)
 	{
 		if (crr[i] > max)max = crr[i];
 	}
-	return max;
+	return (char)max;
 }
 
 void ShiftLeft(double drr[], const int n, int numOfShifts)
@@ -652,53 +641,47 @@ void Search(char crr[], int crr2[], const int n)
 
 void Unique(double drr[], const int n)
 {
-	int c = n; int min = 0; int max = 9;
-	for (int i = 0; i < c; i++)
+	int min = 0; int max = 9;
+	for (int i = 0; i < n; i++)
 	{
-		while ((max - min) < n)max++;
-		bool ran = false;
-		drr[i] = min + rand() % (max - min); drr[i] /= 10;
-		double buff = drr[i];
-		for (int j = 0; j < i; j++)
+		for (int j = 0; j < n; j++)
 		{
-			if (i == j)continue;
-			if (buff == drr[j] && i != j)ran = true; c++;
+			if (drr[j] == drr[i] && i != j)
+			{
+				drr[i] = min + rand() % (max - min);
+				j = 0;
+			}
 		}
-		if (!ran)cout << buff << "\t";
 	}
 }
 void Unique(float frr[], const int n)
 {
-	int c = n; int min = 0; int max = 9;
-	for (int i = 0; i < c; i++)
+	int min = 0; int max = 9;
+	for (int i = 0; i < n; i++)
 	{
-		while ((max - min) < n)max++;
-		bool ran = false;
-		frr[i] = min + rand() % (max - min); frr[i] /= 100;
-		float buff = frr[i];
-		for (int j = 0; j < i; j++)
+		for (int j = 0; j < n; j++)
 		{
-			if (i == j)continue;
-			if (buff == frr[j] && i != j)ran = true; c++;
+			if (frr[j] == frr[i] && i != j)
+			{
+				frr[i] = rand() % (max - min) + min;
+				j = 0;
+			}
 		}
-		if (!ran)cout << buff << "\t";
 	}
 }
 void Unique(char crr[], const int n)
 {
-	int c = n; int min = 0; int max = 9;
-	for (int i = 0; i < c; i++)
+	int min = 50; int max = 100;
+	for (int i = 0; i < n; i++)
 	{
-		while ((max - min) < n)max++;
-		bool ran = false;
-		crr[i] = min + rand() % (max - min);
-		char buff = crr[i];
-		for (int j = 0; j < i; j++)
+		for (int j = 0; j < n; j++)
 		{
-			if (i == j)continue;
-			if (buff == crr[j] && i != j)ran = true;
+			if (crr[j] == crr[i] && i != j)
+			{
+				crr[i] = min + rand() % (max - min);
+				j = 0;
+			}
 		}
-		if (!ran)cout << buff << "\t";
 	}
 }
 
@@ -728,6 +711,21 @@ void Sort(float frr[], const int n)
 				float buff = frr[i];
 				frr[i] = frr[j];
 				frr[j] = buff;
+			}
+		}
+	}
+}
+void Sort(char crr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			if (crr[j] < crr[i])
+			{
+				char buff = crr[i];
+				crr[i] = crr[j];
+				crr[j] = buff;
 			}
 		}
 	}
