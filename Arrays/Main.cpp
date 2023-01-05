@@ -2,22 +2,22 @@
 using namespace std;
 
 #define delimiter "\n-------------------------------------------------------------------\n"
-const int ROWS = 3;
-const int COLS = 4;
+const int rows = 3;
+const int cols = 4;
 
 void FillRand(int arr[], const int n, int minRand = 70, int maxRand = 79); // Реализация
 void FillRand(double arr[], const double n, double minRand = 0, double maxRand = 0.9);
 void FillRand(float arr[], const float n, float minRand = 0, float maxRand = 0.9);
 void FillRand(char arr[], const int n, int minRand = 50, int maxRand = 100);
 
-void FillRand(int i_arr[ROWS][COLS], const int ROWS, const int COLS);
+void FillRand(int i_arr[rows][cols], const int ROWS, const int COLS);
 
 void Print(int arr[], const int n);
 void Print(double arr[], const double n);
 void Print(float arr[], const float n);
 void Print(char arr[], const int n);
 
-void Print(int arr[ROWS][COLS], const int ROWS, const int COLS);
+void Print(int arr[rows][cols], const int ROWS, const int COLS);
 
 int Sum(int arr[], const int n);
 double Sum(double drr[], const double n);
@@ -157,9 +157,9 @@ void main()
 
 
 
-	int i_arr2[ROWS][COLS];
-	FillRand(i_arr2, ROWS, COLS);
-	Print(i_arr2, ROWS, COLS);
+	int i_arr2[rows][cols];
+	FillRand(i_arr2, rows, cols);
+	Print(i_arr2, rows, cols);
 
 }
 // Statistic
@@ -732,7 +732,7 @@ void Sort(char crr[], const int n)
 }
 
 // Actions with double array
-void FillRand(int i_arr[ROWS][COLS], const int ROWS, const int COLS)
+void FillRand(int i_arr[rows][cols], const int ROWS, const int COLS)
 {
 	for (int i = 0; i < ROWS; i++)
 	{
@@ -742,7 +742,7 @@ void FillRand(int i_arr[ROWS][COLS], const int ROWS, const int COLS)
 		}
 	}
 }
-void Print(int arr[ROWS][COLS], const int ROWS, const int COLS)
+void Print(int arr[rows][cols], const int ROWS, const int COLS)
 {
 	for (int i = 0; i < ROWS; i++)
 	{
