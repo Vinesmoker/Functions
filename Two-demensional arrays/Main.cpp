@@ -38,6 +38,11 @@ void ShiftLeft(double drr[rows][cols], const int rows, const int cols, int n);
 void ShiftLeft(float frr[rows][cols], const int rows, const int cols, int n);
 void ShiftLeft(char crr[rows][cols], const int rows, const int cols, int n);
 
+void ShiftRight(int arr[rows][cols], const int rows, const int cols, int n);
+void ShiftRight(double drr[rows][cols], const int rows, const int cols, int n);
+void ShiftRight(float frr[rows][cols], const int rows, const int cols, int n);
+void ShiftRight(char crr[rows][cols], const int rows, const int cols, int n);
+
 
 void main()
 {
@@ -52,6 +57,8 @@ void main()
 	cout << "Максимальное значение элимента в массиве: " << MaxValue(arr, rows, cols) << endl;
 	cout << "Введите количество сдвигов: "; cin >> n; cout << "Сдвиг влево на " << n << ": " << endl;
 	ShiftLeft(arr, rows, cols, n); Print(arr, rows, cols);
+	cout << "Сдвиг вправо на " << n << ": " << endl;
+	ShiftRight(arr, rows, cols, n); Print(arr, rows, cols);
 
 	cout << "______________________________________________________________________________" << "\n\n";
 	cout << "Элементы двумерного массива типа double: " << endl;
@@ -63,6 +70,8 @@ void main()
 	cout << "Максимальное значение элимента в массиве: " << MaxValue(drr, rows, cols) << endl;
 	cout << "Сдвиг влево на " << n << ": " << endl;
 	ShiftLeft(drr, rows, cols, n); Print(drr, rows, cols);
+	cout << "Сдвиг вправо на " << n << ": " << endl;
+	ShiftRight(drr, rows, cols, n); Print(drr, rows, cols);
 
 	cout << "______________________________________________________________________________" << "\n\n";
 	cout << "Элементы двумерного массива типа float: " << endl;
@@ -74,6 +83,8 @@ void main()
 	cout << "Максимальное значение элимента в массиве: " << MaxValue(frr, rows, cols) << endl;
 	cout << "Сдвиг влево на " << n << ": " << endl;
 	ShiftLeft(frr, rows, cols, n); Print(frr, rows, cols);
+	cout << "Сдвиг вправо на " << n << ": " << endl;
+	ShiftRight(frr, rows, cols, n); Print(frr, rows, cols);
 
 	cout << "______________________________________________________________________________" << "\n\n";
 	cout << "Элементы двумерного массива типа char: " << endl;
@@ -85,6 +96,8 @@ void main()
 	cout << "Максимальное значение элимента в массиве: " << MaxValue(crr, rows, cols) << endl;
 	cout << "Сдвиг влево на " << n << ": " << endl;
 	ShiftLeft(crr, rows, cols, n); Print(crr, rows, cols);
+	cout << "Сдвиг вправо на " << n << ": " << endl;
+	ShiftRight(crr, rows, cols, n); Print(crr, rows, cols);
 }
 
 void FillRand(int arr[rows][cols], const int rows, const int cols)
@@ -394,6 +407,67 @@ void ShiftLeft(char crr[rows][cols], const int rows, const int cols, int n)
 				crr[j][c] = crr[j][c + 1];
 			}
 			crr[j][cols - 1] = buff;
+		}
+	}
+}
+
+void ShiftRight(int arr[rows][cols], const int rows, const int cols, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < rows; j++)
+		{
+			int buff = arr[j][cols - 1];
+			for (int c = cols - 2; c >= 0; c--)
+			{
+				arr[j][c + 1] = arr[j][c];
+			}
+			arr[j][0] = buff;
+		}
+	}
+}
+void ShiftRight(double drr[rows][cols], const int rows, const int cols, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < rows; j++)
+		{
+			double buff = drr[j][cols - 1];
+			for (int c = cols - 2; c >= 0; c--)
+			{
+				drr[j][c + 1] = drr[j][c];
+			}
+			drr[j][0] = buff;
+		}
+	}
+}
+void ShiftRight(float frr[rows][cols], const int rows, const int cols, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < rows; j++)
+		{
+			float buff = frr[j][cols - 1];
+			for (int c = cols - 2; c >= 0; c--)
+			{
+				frr[j][c + 1] = frr[j][c];
+			}
+			frr[j][0] = buff;
+		}
+	}
+}
+void ShiftRight(char crr[rows][cols], const int rows, const int cols, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < rows; j++)
+		{
+			char buff = crr[j][cols - 1];
+			for (int c = cols - 2; c >= 0; c--)
+			{
+				crr[j][c + 1] = crr[j][c];
+			}
+			crr[j][0] = buff;
 		}
 	}
 }
