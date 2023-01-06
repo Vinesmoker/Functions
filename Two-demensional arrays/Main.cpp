@@ -33,10 +33,16 @@ double MaxValue(double drr[rows][cols], const int roes, const int cols);
 float MaxValue(float frr[rows][cols], const int rows, const int cols);
 char MaxValue(char crr[rows][cols], const int rows, const int cols);
 
+void ShiftLeft(int arr[rows][cols], const int rows, const int cols, int n);
+void ShiftLeft(double drr[rows][cols], const int rows, const int cols, int n);
+void ShiftLeft(float frr[rows][cols], const int rows, const int cols, int n);
+void ShiftLeft(char crr[rows][cols], const int rows, const int cols, int n);
+
 
 void main()
 {
 	setlocale(LC_ALL, "");
+	int n;
 	int arr[rows][cols]{};
 	cout << "Элементы двумерного массива типа int: " << endl;
 	FillRand(arr, rows, cols); Print(arr, rows, cols);
@@ -44,6 +50,8 @@ void main()
 	cout << "Среднее арефмитическое элеменов в массиве: " << Avg(arr, rows, cols) << endl;
 	cout << "Минимальное значение элемента в массиве: " << MinValue(arr, rows, cols) << endl;
 	cout << "Максимальное значение элимента в массиве: " << MaxValue(arr, rows, cols) << endl;
+	cout << "Введите количество сдвигов: "; cin >> n; cout << "Сдвиг влево на " << n << ": " << endl;
+	ShiftLeft(arr, rows, cols, n); Print(arr, rows, cols);
 
 	cout << "______________________________________________________________________________" << "\n\n";
 	cout << "Элементы двумерного массива типа double: " << endl;
@@ -53,6 +61,8 @@ void main()
 	cout << "Среднее арифметическое элементов массива: " << Avg(drr, rows, cols) << endl;
 	cout << "Минимальное значение элемента в массиве: " << MinValue(drr, rows, cols) << endl;
 	cout << "Максимальное значение элимента в массиве: " << MaxValue(drr, rows, cols) << endl;
+	cout << "Сдвиг влево на " << n << ": " << endl;
+	ShiftLeft(drr, rows, cols, n); Print(drr, rows, cols);
 
 	cout << "______________________________________________________________________________" << "\n\n";
 	cout << "Элементы двумерного массива типа float: " << endl;
@@ -62,6 +72,8 @@ void main()
 	cout << "Среднее арефмитическое элеменов в массиве: " << Avg(frr, rows, cols) << endl;
 	cout << "Минимальное значение элемента в массиве: " << MinValue(frr, rows, cols) << endl;
 	cout << "Максимальное значение элимента в массиве: " << MaxValue(frr, rows, cols) << endl;
+	cout << "Сдвиг влево на " << n << ": " << endl;
+	ShiftLeft(frr, rows, cols, n); Print(frr, rows, cols);
 
 	cout << "______________________________________________________________________________" << "\n\n";
 	cout << "Элементы двумерного массива типа char: " << endl;
@@ -71,6 +83,8 @@ void main()
 	cout << "Среднее арефмитическое элеменов в массиве: " << Avg(crr, rows, cols) << endl;
 	cout << "Минимальное значение элемента в массиве: " << MinValue(crr, rows, cols) << endl;
 	cout << "Максимальное значение элимента в массиве: " << MaxValue(crr, rows, cols) << endl;
+	cout << "Сдвиг влево на " << n << ": " << endl;
+	ShiftLeft(crr, rows, cols, n); Print(crr, rows, cols);
 }
 
 void FillRand(int arr[rows][cols], const int rows, const int cols)
@@ -321,4 +335,65 @@ char MaxValue(char crr[rows][cols], const int rows, const int cols)
 		}
 	}
 	return max;
+}
+
+void ShiftLeft(int arr[rows][cols], const int rows, const int cols, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < rows; j++)
+		{
+			int buff = arr[j][0];
+			for (int c = 0; c < cols - 1; c++)
+			{
+				arr[j][c] = arr[j][c + 1];
+			}
+			arr[j][cols - 1] = buff;
+		}
+	}
+}
+void ShiftLeft(double drr[rows][cols], const int rows, const int cols, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < rows; j++)
+		{
+			double buff = drr[j][0];
+			for (int c = 0; c < cols - 1; c++)
+			{
+				drr[j][c] = drr[j][c + 1];
+			}
+			drr[j][cols - 1] = buff;
+		}
+	}
+}
+void ShiftLeft(float frr[rows][cols], const int rows, const int cols, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < rows; j++)
+		{
+			float buff = frr[j][0];
+			for (int c = 0; c < cols - 1; c++)
+			{
+				frr[j][c] = frr[j][c + 1];
+			}
+			frr[j][cols - 1] = buff;
+		}
+	}
+}
+void ShiftLeft(char crr[rows][cols], const int rows, const int cols, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < rows; j++)
+		{
+			char buff = crr[j][0];
+			for (int c = 0; c < cols - 1; c++)
+			{
+				crr[j][c] = crr[j][c + 1];
+			}
+			crr[j][cols - 1] = buff;
+		}
+	}
 }
