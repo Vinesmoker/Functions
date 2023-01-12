@@ -43,11 +43,27 @@ void ShiftRight(double drr[rows][cols], const int rows, const int cols, int n);
 void ShiftRight(float frr[rows][cols], const int rows, const int cols, int n);
 void ShiftRight(char crr[rows][cols], const int rows, const int cols, int n);
 
+void Search(int arr[rows][cols], int arr2[], const int rows, const int cols);
+void Search(double drr[rows][cols], int drr2[], const int rows, const int cols);
+void Search(float frr[rows][cols], int frr2[], const int rows, const int cols);
+void Search(char crr[rows][cols], int crr2[], const int rows, const int cols);
+
+void Unique(int arr[rows][cols], const int rows, const int cols);
+void Unique(double drr[rows][cols], const int rows, const int cols);
+void Unique(float frr[rows][cols], const int rows, const int cols);
+void Unique(char crr[rows][cols], const int rows, const int cols);
+
+void Sort(int arr[rows][cols], const int rows, const int cols);
+void Sort(double drr[rows][cols], const int rows, const int cols);
+void Sort(float frr[rows][cols], const int rows, const int cols);
+void Sort(char crr[rows][cols], const int rows, const int cols);
+
 
 void main()
 {
 	setlocale(LC_ALL, "");
 	int n;
+	int arr2[rows + cols]{};
 	int arr[rows][cols]{};
 	cout << "Элементы двумерного массива типа int: " << endl;
 	FillRand(arr, rows, cols); Print(arr, rows, cols);
@@ -59,10 +75,16 @@ void main()
 	ShiftLeft(arr, rows, cols, n); Print(arr, rows, cols);
 	cout << "Сдвиг вправо на " << n << ": " << endl;
 	ShiftRight(arr, rows, cols, n); Print(arr, rows, cols);
+	cout << "Поиск повторений в массиве: " << endl;
+	Search(arr, arr2, rows, cols);
+	cout << "Уникальные числа в массиве: " << endl;
+	Unique(arr, rows, cols); Print(arr, rows, cols);
+	cout << "Сортировка массива: " << endl;
+	Sort(arr, rows, cols); Print(arr, rows, cols);
 
 	cout << "______________________________________________________________________________" << "\n\n";
 	cout << "Элементы двумерного массива типа double: " << endl;
-	double drr[rows][cols]{};
+	double drr[rows][cols]{}; int drr2[rows]{};
 	FillRand(drr, rows, cols); Print(drr, rows, cols);
 	cout << "Сумма элементов в массиве: " << Sum(drr, rows, cols) << endl;
 	cout << "Среднее арифметическое элементов массива: " << Avg(drr, rows, cols) << endl;
@@ -72,10 +94,16 @@ void main()
 	ShiftLeft(drr, rows, cols, n); Print(drr, rows, cols);
 	cout << "Сдвиг вправо на " << n << ": " << endl;
 	ShiftRight(drr, rows, cols, n); Print(drr, rows, cols);
+	cout << "Поиск повторений в массиве: " << endl;
+	Search(drr, drr2, rows, cols);
+	cout << "Уникальные числа в массиве: " << endl;
+	Unique(drr, rows, cols); Print(drr, rows, cols);
+	cout << "Сортировка массива: " << endl;
+	Sort(drr, rows, cols); Print(drr, rows, cols);
 
 	cout << "______________________________________________________________________________" << "\n\n";
 	cout << "Элементы двумерного массива типа float: " << endl;
-	float frr[rows][cols]{};
+	float frr[rows][cols]{}; int frr2[rows]{};
 	FillRand(frr, rows, cols); Print(frr, rows, cols);
 	cout << "Сумма элементов в массиве: " << Sum(frr, rows, cols) << endl;
 	cout << "Среднее арефмитическое элеменов в массиве: " << Avg(frr, rows, cols) << endl;
@@ -85,10 +113,16 @@ void main()
 	ShiftLeft(frr, rows, cols, n); Print(frr, rows, cols);
 	cout << "Сдвиг вправо на " << n << ": " << endl;
 	ShiftRight(frr, rows, cols, n); Print(frr, rows, cols);
+	cout << "Поиск повторений в массиве: " << endl;
+	Search(frr, frr2, rows, cols);
+	cout << "Уникальные числа в массиве: " << endl;
+	Unique(frr, rows, cols); Print(frr, rows, cols);
+	cout << "Сортировка массива: " << endl;
+	Sort(frr, rows, cols); Print(frr, rows, cols);
 
 	cout << "______________________________________________________________________________" << "\n\n";
 	cout << "Элементы двумерного массива типа char: " << endl;
-	char crr[rows][cols]{};
+	char crr[rows][cols]{}; int crr2[rows]{};
 	FillRand(crr, rows, cols); Print(crr, rows, cols);
 	cout << "Сумма элементов в массиве: " << Sum(crr, rows, cols) << endl;
 	cout << "Среднее арефмитическое элеменов в массиве: " << Avg(crr, rows, cols) << endl;
@@ -98,6 +132,12 @@ void main()
 	ShiftLeft(crr, rows, cols, n); Print(crr, rows, cols);
 	cout << "Сдвиг вправо на " << n << ": " << endl;
 	ShiftRight(crr, rows, cols, n); Print(crr, rows, cols);
+	cout << "Поиск повторений в массиве: " << endl;
+	Search(crr, crr2, rows, cols);
+	cout << "Уникальные числа в массиве: " << endl;
+	Unique(crr, rows, cols); Print(crr, rows, cols);
+	cout << "Сортировка массива: " << endl;
+	Sort(crr, rows, cols); Print(crr, rows, cols);
 }
 
 void FillRand(int arr[rows][cols], const int rows, const int cols)
@@ -106,7 +146,7 @@ void FillRand(int arr[rows][cols], const int rows, const int cols)
 	{
 		for (int j = 0; j < cols; j++)
 		{
-			arr[i][j] = rand() % 100;
+			arr[i][j] = rand() % 10;
 		}
 	}
 }
@@ -468,6 +508,281 @@ void ShiftRight(char crr[rows][cols], const int rows, const int cols, int n)
 				crr[j][c + 1] = crr[j][c];
 			}
 			crr[j][0] = buff;
+		}
+	}
+}
+
+void Search(int arr[rows][cols], int arr2[], const int rows, const int cols)
+{
+	int count = 0;
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			for (int c = 0; c < j; c++)
+			{
+				if (arr[i][j] == arr[j][c])count++;
+			}
+			arr2[i] = count;
+		}
+		count = 0;
+	}
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			for (int c = 0; c < j; c++)
+			{
+				if (arr[i][j] == arr[j][c])break;
+			}
+			if (arr2[i] > 0)cout << arr[i][j] << "\t" << arr2[i] << endl;
+		}
+	}
+}
+void Search(double drr[rows][cols], int drr2[], const int rows, const int cols)
+{
+	int count = 0;
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{	
+			for (int c = 0; c < j; c++)
+			{
+				if (drr[i][j] == drr[j][c])count++;
+			}
+			drr2[i] = count;
+		}
+		count = 0;
+	}
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			for (int c = 0; c < j; c++)
+			{
+				if (drr[i][j] == drr[j][c])break;
+			}
+			if (drr2[i] > 0)cout << drr[i][j] << "\t" << drr2[i] << endl;
+		}
+	}
+}
+void Search(float frr[rows][cols], int frr2[], const int rows, const int cols)
+{
+	int count = 0;
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			for (int c = 0; c < j; c++)
+			{
+				if (frr[i][j] == frr[j][c])count++;
+			}
+			frr2[i] = count;
+		}
+		count = 0;
+	}
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			for (int c = 0; c < j; c++)
+			{
+				if (frr[i][j] == frr[j][c])break;
+			}
+			if (frr2[i] > 0)cout << frr[i][j] << "\t" << frr2[i] << endl;
+		}
+	}
+}
+void Search(char crr[rows][cols], int crr2[], const int rows, const int cols)
+{
+	int count = 0;
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			for (int c = 0; c < j; c++)
+			{
+				if (crr[i][j] == crr[j][c])count++;
+			}
+			crr2[i] = count;
+		}
+		count = 0;
+	}
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			for (int c = 0; c < j; c++)
+			{
+				if (crr[i][j] == crr[j][c])break;
+			}
+			if (crr2[i] > 0)cout << crr[i][j] << "\t" << crr2[i] << endl;
+		}
+	}
+}
+
+void Unique(int arr[rows][cols], const int rows, const int cols)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			for (int c = 0; c < rows; c++)
+			{
+				for (int d = 0; d < cols; d++)
+				{
+					if (arr[i][j] == arr[c][d] && j != d)
+					{
+						arr[i][j] = rand() % 100;
+						d = 0; j = 0;
+					}
+				}
+			}
+		}
+	}
+}
+void Unique(double drr[rows][cols], const int rows, const int cols) 
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			for (int c = 0; c < rows; c++)
+			{
+				for (int d = 0; d < cols; d++)
+				{
+					if (drr[i][j] == drr[c][d] && j != d)
+					{
+						drr[i][j] = rand() % 100; drr[i][j] /= 10;
+						d = 0; j = 0;
+					}
+				}
+			}
+		}
+	}
+}
+void Unique(float frr[rows][cols], const int rows, const int cols)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			for (int c = 0; c < rows; c++)
+			{
+				for (int d = 0; d < cols; d++)
+				{
+					if (frr[i][j] == frr[c][d] && j != d)
+					{
+						frr[i][j] = rand() % 100; frr[i][j] /= 100;
+						d = 0; j = 0;
+					}
+				}
+			}
+		}
+	}
+}
+void Unique(char crr[rows][cols], const int rows, const int cols)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			for (int c = 0; c < rows; c++)
+			{
+				for (int d = 0; d < cols; d++)
+				{
+					if (crr[i][j] == crr[c][d] && j != d)
+					{
+						crr[i][j] = rand() % 100;
+						d = 0; j = 0;
+					}
+				}
+			}
+		}
+	}
+}
+
+void Sort(int arr[rows][cols], const int rows, const int cols)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			for (int c = 0; c < rows; c++)
+			{
+				for (int d = 0; d < cols; d++)
+				{
+					if (arr[i][j] < arr[c][d])
+					{
+						double buff = arr[i][j];
+						arr[i][j] = arr[c][d];
+						arr[c][d] = buff;
+					}
+				}
+			}
+		}
+	}
+}
+void Sort(double drr[rows][cols], const int rows, const int cols)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			for (int c = 0; c < rows; c++)
+			{
+				for (int d = 0; d < cols; d++)
+				{
+					if (drr[i][j] < drr[c][d])
+					{
+						double buff = drr[i][j];
+						drr[i][j] = drr[c][d];
+						drr[c][d] = buff;
+					}
+				}
+			}
+		}
+	}
+}
+void Sort(float frr[rows][cols], const int rows, const int cols) 
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			for (int c = 0; c < rows; c++)
+			{
+				for (int d = 0; d < cols; d++)
+				{
+					if (frr[i][j] < frr[c][d])
+					{
+						float buff = frr[i][j];
+						frr[i][j] = frr[c][d];
+						frr[c][d] = buff;
+					}
+				}
+			}
+		}
+	}
+}
+void Sort(char crr[rows][cols], const int rows, const int cols) 
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			for (int c = 0; c < rows; c++)
+			{
+				for (int d = 0; d < cols; d++)
+				{
+					if (crr[i][j] < crr[c][d])
+					{
+						char buff = crr[i][j];
+						crr[i][j] = crr[c][d];
+						crr[c][d] = buff;
+					}
+				}
+			}
 		}
 	}
 }
